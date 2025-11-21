@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - ShopHub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="login-card">
+            <h2><i class="fas fa-lock me-2"></i>Admin Login</h2>
+            <form onsubmit="adminLogin(event)">
+                <input type="email" class="form-control" id="adminEmail" placeholder="Admin Email" required>
+                <input type="password" class="form-control" id="adminPassword" placeholder="Password" required>
+                <button type="submit" class="btn-login">Login</button>
+            </form>
+            <p class="text-center mt-3">
+                Demo: admin@example.com / admin123
+            </p>
+            <p class="text-center">
+                <a href="index.html">Back to Home</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script>
+        function adminLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('adminEmail').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            const admin = admins.find(a => a.email === email && a.password === password);
+            if (admin) {
+                localStorage.setItem('currentAdmin', JSON.stringify(admin));
+                alert('Admin login successful!');
+                window.location.href = 'admin/dashboard.html';
+            } else {
+                alert('Invalid admin credentials!');
+            }
+        }
+    </script>
+</body>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Login - ShopHub</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="login-card">
+            <h2><i class="fas fa-user me-2"></i>User Login</h2>
+            <form onsubmit="userLogin(event)">
+                <input type="email" class="form-control" id="userEmail" placeholder="Email" required>
+                <input type="password" class="form-control" id="userPassword" placeholder="Password" required>
+                <button type="submit" class="btn-login">Login</button>
+            </form>
+            <p class="text-center mt-3">
+                Demo: user@example.com / user123
+            </p>
+            <p class="text-center">
+                <a href="index.html">Back to Home</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script>
+        function userLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('userEmail').value;
+            const password = document.getElementById('userPassword').value;
+            
+            const user = users.find(u => u.email === email && u.password === password);
+            if (user) {
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                alert('Login successful!');
+                window.location.href = 'index.html';
+            } else {
+                alert('Invalid credentials!');
+            }
+        }
+    </script>
+</body>
+</html>
